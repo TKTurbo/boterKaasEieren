@@ -7,11 +7,10 @@
 		<script src="main.js"></script>
 	</head>
 	<body>
-
 		<table>
 			<tr>
-				<td id="1">O</td>
-				<td id="2">X</td>
+				<td id="1"></td>
+				<td id="2"></td>
 				<td id="3"></td>
 			</tr>
 			<tr>
@@ -25,6 +24,23 @@
 				<td id="9"></td>
 			</tr>
 		</table>
-
+		<div class="scoreContainer">
+			<div class="buttonWrapper">
+				<button onclick="startGame();">
+					Start
+				</button>
+				<button onclick="resetEverything">
+					Reset
+				</button>
+			</div>
+			<h1 id="speler1">
+				Speler 1
+			</h1>
+			<div id="puntenSpeler1" class="points">Punten: <span>0</span></div>
+			<h1 id="speler2">
+				Speler 2
+			</h1>
+			<div id="puntenSpeler2" class="points">Punten: <span>0</span></div>
+		</div>
 	</body>
 </html>

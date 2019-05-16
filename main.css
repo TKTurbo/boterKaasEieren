@@ -1,7 +1,7 @@
 table{
+    margin-top: 25px;
     margin-left: auto;
     margin-right: auto;
-    transform: translateY(25%);
 }
 
 td{
@@ -11,4 +11,36 @@ td{
     text-align: center;
     font-family: tahoma;
     font-size: 100px;
+}
+
+td:hover{
+    cursor: pointer;
+}
+
+h1{
+    text-align: center;
+}
+
+button{
+    width: 75px;
+    height: 30px;
+}
+
+.scoreContainer{
+    margin-top: 25px;
+    width: 300px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buttonWrapper{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    text-align: center;
+}
+
+.points{
+    text-align: center;
 }
