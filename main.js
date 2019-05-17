@@ -1,13 +1,16 @@
 /*
-### # # ###         #
- #  # #  #  # # ### ### ###
- #  ##   #  # # #   # # # #
- #  # #  #  ### #   ### ###
- #  # #  #
+ ### # # ###         #
+  #  # #  #  # # ### ### ###
+  #  ##   #  # # #   # # # #
+  #  # #  #  ### #   ### ###
+  #  # #  #
+
+ https://github.com/TKTurbo/boterKaasEieren
 */
 
 var players = [];
 var cells = [];
+var currentPlayer;
 
 window.onload = function(){ // Als de pagina volledig is geladen zet dan deze variabelen
 
@@ -22,17 +25,20 @@ window.onload = function(){ // Als de pagina volledig is geladen zet dan deze va
 function startGame(){ // Nadat er geklikt is op de startknop
     var speler1 = prompt('Naam speler 1');
     var speler2 = prompt('Naam speler 2');
-    players[0].innerHTML = speler1;
-    players[1].innerHTML = speler2;
+    players[0].innerHTML = speler1 + ' = O';
+    players[1].innerHTML = speler2 + ' = X';
 
-    var firstPlayer = Math.floor(Math.random() * 2) + 1; // 1 of 2
+    currentPlayer = Math.floor(Math.random() * 2) + 1; // 1 of 2
 
-    for(var i = 0; i < cells.length; i++){
-        cells[i].addEventListener('click', clickOnCell)
-    }
+    enableClicking();
 }
 
-function clickOnCell($hokjeID){
+function clickOnCell(event){
+    if(currentPlayer === 1){
+        cells[event.target.id].innerHTML = 'O';
+    }else if(currentPlayer === 2){;
+        cells[event.target.id].innerHTML = 'X';
+    }
 }
 
 function resetEverything(){
@@ -40,4 +46,24 @@ function resetEverything(){
     clickedCells[1] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     //TODO: Score reset en andere dingen
+}
+
+function enableClicking(){
+    for(var i = 0; i < cells.length; i++){
+        cells[i].addEventListener('click', clickOnCell)
+    }
+}
+
+function disableClicking(){
+    for(var i = 0; i < cells.length; i++){
+        cells[i].removeEventListener('click', clickOnCell)
+    }
+}
+
+function checkClicked(event){ // Kijkt of er al op de knop geklikt is
+    if(cells[event.target.id].innerHTML !== ''){
+        return true;
+    }else{
+        return false;
+    }
 }
