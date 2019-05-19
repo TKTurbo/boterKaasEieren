@@ -9,9 +9,20 @@
 */
 
 var players = [];
-var cells = [];
+var cells = ["", "", "", "", "", "", "", "", ""];
 var clickedCells = [];
 var currentPlayer;
+
+var allCombs = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+];
 
 window.onload = function(){ // Als de pagina volledig is geladen zet dan deze variabelen
 
@@ -80,28 +91,19 @@ function checkClicked(event){ // Kijkt of er al op de knop geklikt is
 
 function checkEnd(){
     for(var i = 0; i < cells.length; i++){
-        clickedCells[i] = cells[i].innerHTML; // Array met alle gelikte cellen en
+        clickedCells[i] = cells[i].innerHTML; // Array met alle gelikte cellen
     }
 
-    if(clickedCells[0] && clickedCells[1] && clickedCells[2] === 'X' // TODO: Refactoring?
-        || clickedCells[3] && clickedCells[4] && clickedCells[5] === 'X'
-        || clickedCells[6] && clickedCells[7] && clickedCells[8] === 'X'
-        || clickedCells[0] && clickedCells[3] && clickedCells[6] === 'X'
-        || clickedCells[1] && clickedCells[4] && clickedCells[7] === 'X'
-        || clickedCells[2] && clickedCells[5] && clickedCells[8] === 'X'
-        || clickedCells[0] && clickedCells[4] && clickedCells[7] === 'X'
-        || clickedCells[2] && clickedCells[4] && clickedCells[6] === 'X'){
-        alert(currentPlayer + ' heeft gewonnen!')
-    }else if(clickedCells[0] && clickedCells[1] && clickedCells[2] === 'O' // TODO: Refactoring?
-        || clickedCells[3] && clickedCells[4] && clickedCells[5] === 'O'
-        || clickedCells[6] && clickedCells[7] && clickedCells[8] === 'O'
-        || clickedCells[0] && clickedCells[3] && clickedCells[6] === 'O'
-        || clickedCells[1] && clickedCells[4] && clickedCells[7] === 'O'
-        || clickedCells[2] && clickedCells[5] && clickedCells[8] === 'O'
-        || clickedCells[0] && clickedCells[4] && clickedCells[7] === 'O'
-        || clickedCells[2] && clickedCells[4] && clickedCells[6] === 'O') {
-        alert(currentPlayer + ' heeft gewonnen!')
+    for(var a = 0; a < allCombs.length; a++){ // TODO: eindigen
+        if(clickedCells[allCombs[a][0]] === "X" && clickedCells[allCombs[a][1]] === "X" && clickedCells[allCombs[a][2]] === "X"){
+            done();
+        }else if(clickedCells[allCombs[a][0]] === "O" && clickedCells[allCombs[a][1]] === "O" && clickedCells[allCombs[a][2]] === "O"){
+            done();
+        }
     }
-
     // 012, 345, 678, 036, 147, 258, 047, 246 - Alle mogelijke combinaties
+}
+
+function done(){
+    alert('Joehoe!')
 }
