@@ -12,6 +12,7 @@ var players = [];
 var cells = ["", "", "", "", "", "", "", "", ""];
 var clickedCells = [];
 var currentPlayer;
+var playerNames = [];
 
 var allCombs = [
     [0, 1, 2],
@@ -29,9 +30,7 @@ window.onload = function(){ // Als de pagina volledig is geladen zet dan deze va
     cells = document.getElementsByTagName('td');
     players = [document.getElementById("speler1"), document.getElementById("speler2")]; // De headers met namen van de spelers
 
-    var clickedCells = [0, 1]; // 0 is speler 1, 1 is speler 2
-    clickedCells[0] = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //Alle kaarten in het spel, op volgorder van index
-    clickedCells[1] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    clickedCells = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //Alle kaarten in het spel, op volgorder van index
 
     document.getElementById('gameButton').addEventListener('click', startGame);
 };
@@ -39,11 +38,11 @@ window.onload = function(){ // Als de pagina volledig is geladen zet dan deze va
 function startGame(){ // Nadat er geklikt is op de startknop
     document.getElementById('gameButton').removeEventListener('click', startGame);
     document.getElementById('gameButton').innerHTML = 'Reset';
-    document.getElementById('gameButton').addEventListener('click', reloadPage);
-    var speler1 = prompt('Naam speler 1');
-    var speler2 = prompt('Naam speler 2');
-    players[0].innerHTML = speler1 + ' = O';
-    players[1].innerHTML = speler2 + ' = X';
+    document.getElementById('gameButton').addEventListener('click', resetEverything);
+    playerNames[0] = prompt('Naam speler O');
+    playerNames[1] = prompt('Naam speler X');
+    players[0].innerHTML = playerNames[0] + ' = O';
+    players[1].innerHTML = playerNames[1] + ' = X';
 
     currentPlayer = Math.floor(Math.random() * 2) + 1; // 1 of 2
 
@@ -51,6 +50,7 @@ function startGame(){ // Nadat er geklikt is op de startknop
 }
 
 function clickOnCell(event){
+	document.getElementById(event.target.id).removeEventListener('click', clickOnCell);
     if(currentPlayer === 1){
         cells[event.target.id].innerHTML = 'O';
         checkEnd();
@@ -62,31 +62,32 @@ function clickOnCell(event){
     }
 }
 
-function reloadPage(){
-    var quit = confirm('Zeker weten?');
-    if(quit === true){
-        location.reload();
-    }
+function reset(){ // Reset ronde-dingen zoals het spelbord en het klikken
+	clearCells();
+	enableClicking();
+	clickedCells = [];
 }
 
-function enableClicking(){
+function resetEverything(){ // Reset alles
+	location.reload();
+}
+
+function enableClicking(){ // Zorgt dat je overal op kan klikken
     for(var i = 0; i < cells.length; i++){
-        cells[i].addEventListener('click', clickOnCell)
+        document.getElementById(i).addEventListener('click', clickOnCell);
     }
 }
 
-function disableClicking(){
-    for(var i = 0; i < cells.length; i++){
-        cells[i].removeEventListener('click', clickOnCell)
-    }
+function disableClicking(){ // Zorgt dat je nergens op kan klikken
+	for(var i = 0; i < cells.length; i++){
+		cells[i].removeEventListener('click', clickOnCell);
+	}
 }
 
-function checkClicked(event){ // Kijkt of er al op de knop geklikt is
-    if(cells[event.target.id].innerHTML !== ''){
-        return true;
-    }else{
-        return false;
-    }
+function clearCells(){
+	for(var i = 0; i < cells.length; i++){
+		document.getElementById(i).innerHTML = "";
+	}
 }
 
 function checkEnd(){
@@ -94,16 +95,42 @@ function checkEnd(){
         clickedCells[i] = cells[i].innerHTML; // Array met alle gelikte cellen
     }
 
-    for(var a = 0; a < allCombs.length; a++){ // TODO: eindigen
+    for(var a = 0; a < allCombs.length; a++){
         if(clickedCells[allCombs[a][0]] === "X" && clickedCells[allCombs[a][1]] === "X" && clickedCells[allCombs[a][2]] === "X"){
-            done();
+			alert('Winnaar is ' + playerNames[0] + ' - X');
+			addPoints(O);
+			break;
         }else if(clickedCells[allCombs[a][0]] === "O" && clickedCells[allCombs[a][1]] === "O" && clickedCells[allCombs[a][2]] === "O"){
-            done();
+        	winner = playerNames[1];
+            alert('Winnaar is ' + playerNames[1] + ' - O');
+            addPoints(X);
+			break;
         }
+
+        if(!clickedCells.includes("")){
+			alert('Gelijk!');
+			gameEnd();
+			break;
+		}
     }
     // 012, 345, 678, 036, 147, 258, 047, 246 - Alle mogelijke combinaties
 }
 
-function done(){
-    alert('Joehoe!')
+function addPoints(winner){
+	if(winner === O){
+		document.getElementById("ps1").innerHTML++;
+	}else if(currentPlayer === X){
+		document.getElementById("ps1").innerHTML++;
+	}
+	gameEnd();
+}
+
+function gameEnd(){
+	var again = confirm('Nog een keer?');
+
+	if(again === true){
+		reset()
+	}else{
+		resetEverything();
+	}
 }
