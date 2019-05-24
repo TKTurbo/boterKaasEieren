@@ -97,12 +97,12 @@ function checkEnd(){
 
     for(var a = 0; a < allCombs.length; a++){
         if(clickedCells[allCombs[a][0]] === "X" && clickedCells[allCombs[a][1]] === "X" && clickedCells[allCombs[a][2]] === "X"){
-			alert('Winnaar is ' + playerNames[0] + ' - X');
+			alert('Winnaar is ' + playerNames[1] + ' - X');
 			addPoints('X');
 			break;
         }else if(clickedCells[allCombs[a][0]] === "O" && clickedCells[allCombs[a][1]] === "O" && clickedCells[allCombs[a][2]] === "O"){
         	winner = playerNames[1];
-            alert('Winnaar is ' + playerNames[1] + ' - O');
+            alert('Winnaar is ' + playerNames[0] + ' - O');
             addPoints('O');
 			break;
         }
