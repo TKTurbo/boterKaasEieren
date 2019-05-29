@@ -46,6 +46,8 @@ function startGame(){ // Nadat er geklikt is op de startknop
 
     currentPlayer = Math.floor(Math.random() * 2) + 1; // 1 of 2
 
+    document.getElementById('speler'+currentPlayer).style.color = 'green';
+
     enableClicking();
 }
 
@@ -53,16 +55,24 @@ function clickOnCell(event){
 	document.getElementById(event.target.id).removeEventListener('click', clickOnCell);
     if(currentPlayer === 1){
         cells[event.target.id].innerHTML = 'O';
+        document.getElementById('speler1').style.color = 'black';
+        document.getElementById('speler2').style.color = 'green';
         checkEnd();
         currentPlayer = 2;
     }else if(currentPlayer === 2){
         cells[event.target.id].innerHTML = 'X';
+        document.getElementById('speler1').style.color = 'green';
+        document.getElementById('speler2').style.color = 'black';
         checkEnd();
         currentPlayer = 1;
     }
 }
 
 function reset(){ // Reset ronde-dingen zoals het spelbord en het klikken
+    document.getElementById('speler1').style.color = 'black';
+    document.getElementById('speler2').style.color = 'black';
+    currentPlayer = Math.floor(Math.random() * 2) + 1; // 1 of 2
+    document.getElementById('speler'+currentPlayer).style.color = 'green';
 	clearCells();
 	enableClicking();
 	clickedCells = [];
