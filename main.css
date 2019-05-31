@@ -5,12 +5,15 @@ table{
 }
 
 td{
-    border: 1px solid black;
+    border: 1px solid grey;
     width: 100px;
     height: 100px;
     text-align: center;
     font-family: "tahoma", serif;
     font-size: 75px;
+    animation: reverseChange 30s infinite;
+    -webkit-animation: reverseChange 30s infinite; /* Safari en Chrome */
+    color: grey;
 }
 
 td:hover{
@@ -19,11 +22,22 @@ td:hover{
 
 h1{
     text-align: center;
+    text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
+    font-family: "Tahoma", serif;
+}
+
+.points{
+    text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
+    font-family: "Tahoma", verdana;
 }
 
 button{
     width: 75px;
     height: 30px;
+    animation: reverseChange 30s infinite;
+    -webkit-animation: reverseChange 30s infinite; /* Safari en Chrome */
+    color: grey;
+    border: solid 1px grey;
 }
 
 .scoreContainer{
@@ -43,4 +57,35 @@ button{
 
 .points{
     text-align: center;
+}
+
+/* Regenboog */
+
+body{
+    animation: normalChange 30s infinite;
+    -webkit-animation: normalChange 30s infinite; /* Safari en Chrome */
+}
+
+@keyframes normalChange{
+    0% {background: white;}
+    40% {background: black;}
+    100% {background: white;}
+}
+
+@-webkit-keyframes normalChange{ /* Safari en Chrome */
+    0% {background: white;}
+    40% {background: black;}
+    00% {background: white;}
+}
+
+@keyframes reverseChange{
+    0% {background: white; border: black solid 1px;}
+    60% {background: black;  border: white solid 1px;}
+    100% {background: white; border: black solid 1px;}
+}
+
+@-webkit-keyframes reverseChange{ /* Safari en Chrome */
+    0% {background: white; border: black solid 1px;}
+    60% {background: black;  border: white solid 1px;}
+    100% {background: white; border: black solid 1px;}
 }
