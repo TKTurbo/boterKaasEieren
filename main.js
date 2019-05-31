@@ -88,12 +88,6 @@ function enableClicking(){ // Zorgt dat je overal op kan klikken
     }
 }
 
-function disableClicking(){ // Zorgt dat je nergens op kan klikken
-	for(var i = 0; i < cells.length; i++){
-		cells[i].removeEventListener('click', clickOnCell);
-	}
-}
-
 function clearCells(){
 	for(var i = 0; i < cells.length; i++){
 		document.getElementById(i).innerHTML = "";
