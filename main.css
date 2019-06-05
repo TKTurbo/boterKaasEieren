@@ -11,9 +11,8 @@ td{
     text-align: center;
     font-family: "tahoma", serif;
     font-size: 75px;
-    animation: reverseChange 30s infinite;
-    -webkit-animation: reverseChange 30s infinite; /* Safari en Chrome */
-    color: grey;
+    color: salmon;
+    background-color: black;
 }
 
 td:hover{
@@ -34,10 +33,9 @@ h1{
 button{
     width: 75px;
     height: 30px;
-    animation: reverseChange 30s infinite;
-    -webkit-animation: reverseChange 30s infinite; /* Safari en Chrome */
-    color: grey;
+    color: salmon;
     border: solid 1px grey;
+    background-color: black;
 }
 
 .scoreContainer{
