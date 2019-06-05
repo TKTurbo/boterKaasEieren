@@ -140,6 +140,8 @@ function checkEnd(){ // Kijkt elke zet of het spel eindigt
     }
     for(var b = 0; b < allCombs.length; b++){
         if(!clickedCells.includes("")){ // Als de array 'clickedCells' geen spatie bevat betekent het dat alles geklikt is en dat er geen match is, dus gelijkspel.
+            music.pause();
+            music.currentTime = 0;
             audio = new Audio('sounds/bruh.mp3');
             audio.play();
 			alert('Gelijk!');
