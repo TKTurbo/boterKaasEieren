@@ -125,7 +125,7 @@ function checkEnd(){ // Kijkt elke zet of het spel eindigt
             alert('Winnaar is ' + playerNames[1] + ' - X');
             addPoints('X');
             return;
-            break;
+            break; // Zonder breaks blijft het verder kijken, wat niet nodig is.
         } else if (clickedCells[allCombs[a][0]] === "O" && clickedCells[allCombs[a][1]] === "O" && clickedCells[allCombs[a][2]] === "O") {
             music.pause();
             music.currentTime = 0;
