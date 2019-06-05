@@ -15,7 +15,9 @@ var cells = ["", "", "", "", "", "", "", "", ""]; // Alle cellen die later worde
 var clickedCells = []; // Alle cellen waarop geklikt is.
 var currentPlayer;
 var playerNames = [];
-var audio;
+var music = new Audio('sounds/pacman.wav'); // Muziekje
+    music.loop = true;
+var sound; // Wingeluid
 
 var allCombs = [ // Alle mogelijke combinaties.
     [0, 1, 2],
@@ -39,20 +41,19 @@ window.onload = function(){ // Als de pagina volledig is geladen zet dan deze va
 };
 
 function startGame(){ // Nadat er geklikt is op de startknop
-    audio = new Audio('sounds/pacman.wav');
-    audio.play();
     document.getElementById('gameButton').removeEventListener('click', startGame);
     document.getElementById('gameButton').innerHTML = 'Reset';
     document.getElementById('gameButton').addEventListener('click', resetEverything);
     playerNames[0] = prompt('Naam speler O');
     playerNames[1] = prompt('Naam speler X');
+
     players[0].innerHTML = playerNames[0] + ' = O (Speler 1)';
     players[1].innerHTML = playerNames[1] + ' = X (Speler 2';
 
+    music.play();
+
     currentPlayer = Math.floor(Math.random() * 2) + 1; // 1 of 2
-
     document.getElementById('speler'+currentPlayer).style.color = 'salmon';
-
     enableClicking();
 }
 
@@ -74,8 +75,7 @@ function clickOnCell(event){
 }
 
 function reset(){ // Reset ronde-dingen zoals het spelbord en het klikken.
-    audio = new Audio('sounds/pacman.wav');
-    audio.play();
+    music.play();
     currentPlayer = Math.floor(Math.random() * 2) + 1; // 1 of 2
     clickedCells = [];
     clearCells();
@@ -118,15 +118,19 @@ function checkEnd(){ // Kijkt elke zet of het spel eindigt
         */
 
         if (clickedCells[allCombs[a][0]] === "X" && clickedCells[allCombs[a][1]] === "X" && clickedCells[allCombs[a][2]] === "X") {
-            audio = new Audio('sounds/speler2.wav');
-            audio.play();
+            music.pause();
+            music.currentTime = 0;
+            sound = new Audio('sounds/speler2.wav');
+            sound.play();
             alert('Winnaar is ' + playerNames[1] + ' - X');
             addPoints('X');
             return;
             break;
         } else if (clickedCells[allCombs[a][0]] === "O" && clickedCells[allCombs[a][1]] === "O" && clickedCells[allCombs[a][2]] === "O") {
-            audio = new Audio('sounds/speler1.wav');
-            audio.play();
+            music.pause();
+            music.currentTime = 0;
+            sound = new Audio('sounds/speler1.wav');
+            sound.play();
             winner = playerNames[1];
             alert('Winnaar is ' + playerNames[0] + ' - O');
             addPoints('O');
